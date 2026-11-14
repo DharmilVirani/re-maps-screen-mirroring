@@ -1,0 +1,18 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:maplibre-android-artifacts",
+  "slug": "maplibre-android-artifacts",
+  "title": "MapLibre Android artifacts and rendering backends",
+  "source_type": "official_documentation",
+  "publisher": {"name": "MapLibre", "organization": "MapLibre"},
+  "locator": {"url": "https://maplibre.org/maplibre-native/android/examples/artifacts/"},
+  "version": {"label": "MapLibre Android API documentation 13.7.1 accessed 2026-11-07"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-02-07T00:00:00Z", "volatility_notes": "Recheck the latest artifact version and backend compatibility before implementation."},
+  "license": {"status": "known", "spdx_id": "BSD-2-Clause", "name": "BSD 2-Clause License", "url": "https://github.com/maplibre/maplibre-native/blob/main/LICENSE.md", "redistribution": "allowed"},
+  "confidence": {"level": "high", "score": 0.94, "rationale": "Maintainer release and artifact documentation; target GPU behavior remains a separate validation."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:maplibre-android-sdk-13-7-1", "claim": "MapLibre publishes the Android artifact org.maplibre.gl:android-sdk to Maven Central; the Android API documentation showed release 13.7.1 when accessed on 2026-11-07.", "relationship": "direct_support", "location": "Artifacts and API documentation version"}]
+}

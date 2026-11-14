@@ -1,0 +1,18 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:maplibre-http-client",
+  "slug": "maplibre-http-client",
+  "title": "MapLibre Android HttpRequestUtil API",
+  "source_type": "official_documentation",
+  "publisher": {"name": "MapLibre", "organization": "MapLibre"},
+  "locator": {"url": "https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.module.http/-http-request-util/index.html"},
+  "version": {"label": "MapLibre Android API documentation 13.7.1 accessed 2026-11-07"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-02-07T00:00:00Z", "volatility_notes": "The module HTTP API may change between SDK releases."},
+  "license": {"status": "known", "spdx_id": "BSD-2-Clause", "name": "BSD 2-Clause License", "url": "https://github.com/maplibre/maplibre-native/blob/main/LICENSE.md", "redistribution": "allowed"},
+  "confidence": {"level": "high", "score": 0.94, "rationale": "Maintainer API documentation for the current MapLibre Android SDK."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:maplibre-http-client-override", "claim": "MapLibre Android HttpRequestUtil allows an application to provide an OkHttp Call.Factory used for requesting map resources.", "relationship": "direct_support", "location": "setOkHttpClient"}]
+}

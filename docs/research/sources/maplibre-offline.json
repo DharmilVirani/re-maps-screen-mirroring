@@ -1,0 +1,17 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:maplibre-offline",
+  "slug": "maplibre-offline",
+  "title": "MapLibre Native Android offline API",
+  "source_type": "official_documentation",
+  "publisher": {"name": "MapLibre", "organization": "MapLibre"},
+  "locator": {"url": "https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.offline/index.html"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z", "volatility_notes": "API surface may change between MapLibre Native releases."},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.92, "rationale": "Maintainer API documentation; provider data and target device rendering are separate concerns."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:maplibre-offline-regions", "claim": "MapLibre Native Android exposes offline-region APIs; using the API does not itself provide map tiles, provider availability, or offline-use rights.", "relationship": "direct_support", "location": "Offline API package"}]
+}

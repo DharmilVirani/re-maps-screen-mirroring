@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:shizuku-api", "slug": "shizuku-api",
+  "title": "Shizuku API README and changelog", "source_type": "repository", "publisher": {"name": "RikkaApps", "organization": "RikkaApps"},
+  "locator": {"url": "https://github.com/RikkaApps/Shizuku-API"}, "version": {"label": "13.1.5"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-02-07T00:00:00Z", "volatility_notes": "API is versioned and newProcess is deprecated/planned for removal."},
+  "license": {"status": "known", "spdx_id": "MIT", "name": "MIT License", "url": "https://github.com/RikkaApps/Shizuku-API/blob/master/LICENSE", "redistribution": "allowed", "usage_notes": "Used as an Android dependency; retain its license if redistributing the library."},
+  "confidence": {"level": "high", "score": 0.93, "rationale": "Maintainer documentation and API repository."}, "evidence_status": "validated", "language": "en",
+  "claims": [{"claim_id": "claim:shizuku-fixed-shell-operations", "claim": "Shizuku requires explicit user setup and permission, can run a UserService with shell or root identity, and the maintainer recommends UserService instead of deprecated newProcess.", "relationship": "direct_support"}]
+}

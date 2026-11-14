@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:android-network-api", "slug": "android-network-api",
+  "title": "Network API", "source_type": "official_documentation", "publisher": {"name": "Android Developers", "organization": "Google"},
+  "locator": {"url": "https://developer.android.com/reference/android/net/Network"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "stable", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z"},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.96, "rationale": "Primary API reference."}, "evidence_status": "validated", "language": "en",
+  "claims": [{"claim_id": "claim:android-local-wifi-network", "claim": "Android Network.bindSocket can bind an individual socket to a selected Network, avoiding process-wide routing changes.", "relationship": "direct_support"}]
+}

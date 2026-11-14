@@ -1,0 +1,25 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:android-overlay-permission",
+  "slug": "android-overlay-permission",
+  "title": "Android overlay-window permission and settings API",
+  "source_type": "official_documentation",
+  "publisher": { "name": "Android Developers", "organization": "Google" },
+  "locator": { "url": "https://developer.android.com/reference/android/Manifest.permission#SYSTEM_ALERT_WINDOW" },
+  "version": { "label": "Android API reference accessed 2026-11-08" },
+  "access": { "method": "web", "accessed_at": "2026-11-08T10:17:12Z", "requires_auth": false, "availability": "public" },
+  "freshness": { "classification": "current", "status": "fresh", "last_verified_at": "2026-11-08T10:17:12Z", "review_after": "2027-02-08T10:17:12Z", "volatility_notes": "Recheck overlay permission and settings behavior when Android support or target SDK changes." },
+  "license": { "status": "not_applicable", "redistribution": "metadata_and_summary_only" },
+  "confidence": { "level": "high", "score": 0.95, "rationale": "Official Android API reference for the overlay permission and TYPE_APPLICATION_OVERLAY." },
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [
+    {
+      "claim_id": "claim:android-overlay-window-permission",
+      "claim": "Apps targeting API 23 or later need the user to grant SYSTEM_ALERT_WINDOW before showing TYPE_APPLICATION_OVERLAY windows; Settings.canDrawOverlays checks this authorization and ACTION_MANAGE_OVERLAY_PERMISSION opens the settings flow.",
+      "relationship": "direct_support",
+      "location": "SYSTEM_ALERT_WINDOW and Settings.canDrawOverlays API reference"
+    }
+  ]
+}

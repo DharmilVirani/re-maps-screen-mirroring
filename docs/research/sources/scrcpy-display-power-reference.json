@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:scrcpy-display-power-reference", "slug": "scrcpy-display-power-reference",
+  "title": "scrcpy device display power controls", "source_type": "repository", "publisher": {"name": "Genymobile", "organization": "Genymobile"},
+  "locator": {"url": "https://github.com/Genymobile/scrcpy/blob/master/doc/device.md"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z", "volatility_notes": "Command support depends on Android version and OEM implementation."},
+  "license": {"status": "known", "spdx_id": "Apache-2.0", "name": "Apache License 2.0", "url": "https://github.com/Genymobile/scrcpy/blob/master/LICENSE", "redistribution": "allowed"},
+  "confidence": {"level": "medium", "score": 0.72, "rationale": "Maintained implementation documentation; not an Android compatibility guarantee."}, "evidence_status": "validated", "language": "en",
+  "claims": [{"claim_id": "claim:shizuku-fixed-shell-operations", "claim": "scrcpy documents display power-off and power-on techniques, including cmd display power commands on supported Android versions.", "relationship": "indirect_support", "notes": "Informs a target-device experiment only; no claim of OEM support."}]
+}

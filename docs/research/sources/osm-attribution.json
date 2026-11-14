@@ -1,0 +1,17 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:osm-attribution",
+  "slug": "osm-attribution",
+  "title": "OpenStreetMap Foundation Attribution Guidelines",
+  "source_type": "official_documentation",
+  "publisher": {"name": "OpenStreetMap Foundation", "organization": "OpenStreetMap Foundation"},
+  "locator": {"url": "https://osmfoundation.org/wiki/Attribution_Guidelines"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "stable", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-11-07T00:00:00Z"},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.95, "rationale": "Published guidance from the OpenStreetMap Foundation."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:osm-visible-attribution", "claim": "OpenStreetMap map data requires attribution that is visible and readable in the rendered product.", "relationship": "direct_support", "location": "Attribution guidelines"}]
+}

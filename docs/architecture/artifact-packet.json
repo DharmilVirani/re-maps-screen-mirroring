@@ -1,0 +1,195 @@
+{
+  "artifact_type": "leader-artifact-packet",
+  "schema_version": "1.0.0",
+  "id": "packet:mirrordash-implementation-v1",
+  "project_definition": {
+    "id": "project:mirrordash-android-app-v1",
+    "path": "docs/project/project-definition.json"
+  },
+  "evidence_ledger": {
+    "path": "docs/research/evidence-ledger.json",
+    "source_ids": [
+      "source:android-displaymanager",
+      "source:android-doze",
+      "source:android-foreground-service-types",
+      "source:android-location-screen-off",
+      "source:android-mediacodec",
+      "source:android-network-api",
+      "source:android-wifi-permissions",
+      "source:android-wifi-specifier",
+      "source:betterdash-control-reference",
+      "source:internal-tripper-validation",
+      "source:maplibre-android-artifacts",
+      "source:maplibre-http-client",
+      "source:maplibre-offline",
+      "source:maplibre-snapshotter",
+      "source:opendash-reference",
+      "source:openfreemap-terms",
+      "source:openmotodash-protocol-reference",
+      "source:osm-attribution",
+      "source:tripper-user-observations",
+      "source:renderer-spike-phone-run"
+    ]
+  },
+  "persona_compositions": [
+    {
+      "id": "composition:3c385c4994bb040bcb313b97",
+      "path": "docs/personas/architecture-council.json",
+      "decision_id": "decision:android-screen-mirror-architecture"
+    },
+    {
+      "id": "composition:b5ab283c37218fca1174e6c9",
+      "path": "docs/personas/security-council.json",
+      "decision_id": "decision:screen-capture-security-review"
+    }
+  ],
+  "capability_dag": {
+    "id": "graph:mirrordash-implementation",
+    "path": "docs/architecture/capability-dag.json"
+  },
+  "artifact_ownership": [
+    {
+      "artifact": "docs/project/project-definition.json",
+      "owner": "project-definition-interpreter"
+    },
+    {
+      "artifact": "docs/research/evidence-ledger.json and docs/research/sources/*.json",
+      "owner": "evidence-research-broker"
+    },
+    {
+      "artifact": "docs/personas/architecture-council.json and docs/personas/security-council.json",
+      "owner": "persona-composer"
+    },
+    {
+      "artifact": "docs/architecture/capability-dag.json and docs/architecture/artifact-packet.json",
+      "owner": "leader-agent"
+    },
+    {
+      "artifact": "app/src/main/java/com/dharmil/mirrordash/** except panel/**",
+      "owner": "mobile-app-engineer"
+    },
+    {
+      "artifact": "docs/reviews/security-review.md",
+      "owner": "security-reviewer"
+    },
+    {
+      "artifact": "Parked-bike test evidence and measured thermal notes",
+      "owner": "project owner"
+    }
+  ],
+  "api_and_message_contracts": [
+    "A visible Ride screen starts a non-exported location|connectedDevice foreground service with the validated dynamic Tripper profile and selected local route.",
+    "MapLibre renders an app-owned map and overlays in a Presentation attached to a private VirtualDisplay whose output Surface feeds the existing MediaCodec H.264 encoder.",
+    "GPX route geometry and completed offline map packs remain in private app storage; live GPS remains in memory and is not transmitted to the map provider during a ride.",
+    "All Tripper DatagramSockets bind to the user-selected Network; inbound control is filtered by configured TFT source IP.",
+    "A service-owned session receives location and control packets, updates the renderer on the main thread, handles confirmed joystick actions, and releases resources in reverse dependency order.",
+    "The offline map provider receives tile requests for the selected area during preparation. Use an identifying User-Agent, current provider limits, and visible attribution.",
+    "Passphrase is session-only; route points, coordinates, encoded frames and full control packets are excluded from logs and analytics.",
+    "The TFT identity is not cryptographically pinned and H.264/RTP is not end-to-end encrypted; connect only to a trusted Tripper Wi-Fi network."
+  ],
+  "verification_matrix": [
+    {
+      "test_id": "TST-MD-01",
+      "requirement_id": "requirement:app-owned-map-rendering",
+      "evidence": "Parked target TFT layout/crop result; pending.",
+      "status": "pending",
+      "owner": "project owner"
+    },
+    {
+      "test_id": "TST-MD-02",
+      "requirement_id": "requirement:tripper-stream",
+      "evidence": "Default-profile continuous H.264/RTP result; pending.",
+      "status": "pending",
+      "owner": "project owner"
+    },
+    {
+      "test_id": "TST-MD-03",
+      "requirement_id": "requirement:gpx-offline-navigation",
+      "evidence": "Offline route preview with internet disabled after preparation; pending.",
+      "status": "pending",
+      "owner": "project owner"
+    },
+    {
+      "test_id": "TST-MD-04",
+      "requirement_id": "requirement:screen-off-foreground-session",
+      "evidence": "Screen-off and lock observations; pending.",
+      "status": "pending",
+      "owner": "project owner"
+    },
+    {
+      "test_id": "TST-MD-05",
+      "requirement_id": "requirement:joystick-control",
+      "evidence": "Button ACK, reversible zoom and confirmed recenter observations; pending.",
+      "status": "pending",
+      "owner": "project owner"
+    },
+    {
+      "test_id": "TST-MD-06",
+      "requirement_id": "requirement:editable-tripper-profile",
+      "evidence": "Profile persistence and passphrase non-persistence; pending.",
+      "status": "pending",
+      "owner": "project owner"
+    },
+    {
+      "test_id": "TST-MD-07",
+      "requirement_id": "requirement:bounded-session-resources",
+      "evidence": "Stop, bounded reconnect and cleanup observations; pending.",
+      "status": "pending",
+      "owner": "project owner"
+    },
+    {
+      "test_id": "TST-MD-08",
+      "requirement_id": "requirement:offline-map-provider-terms",
+      "evidence": "Provider/area disclosure, attribution, local-route privacy review; pending.",
+      "status": "pending",
+      "owner": "project owner"
+    },
+    {
+      "test_id": "TST-MD-09",
+      "requirement_id": "requirement:video-profile-guardrails",
+      "evidence": "Parked resolution sweep and supported-mode evidence; pending.",
+      "status": "pending",
+      "owner": "project owner"
+    }
+  ],
+  "review_gates": [
+    {
+      "id": "gate:project-definition",
+      "criterion": "PDC, approved spec, evidence sources and acceptance cases agree.",
+      "status": "passed"
+    },
+    {
+      "id": "gate:renderer-spike",
+      "criterion": "App-owned static test view reaches the target TFT at 526×300 with phone display-off and lock observed separately.",
+      "status": "pending"
+    },
+    {
+      "id": "gate:map-provider-limits",
+      "criterion": "One offline region remains within provider caps and can be cancelled/deleted safely.",
+      "status": "pending"
+    },
+    {
+      "id": "gate:debug-apk-build",
+      "criterion": "Debug APK assembles against SDK 37 without claiming hardware compatibility; current working tree built successfully.",
+      "status": "passed"
+    },
+    {
+      "id": "gate:parked-bike-acceptance",
+      "criterion": "Route map, screen-off/lock, joystick, reconnect, stop and disclosure are validated on the actual bike.",
+      "status": "pending"
+    },
+    {
+      "id": "gate:security-review",
+      "criterion": "Independent review checks permissions, route/GPS privacy, provider disclosure, cleartext transport and cleanup.",
+      "status": "pending"
+    }
+  ],
+  "replan_triggers": [
+    "Presentation/VirtualDisplay does not deliver continuous app-owned frames to the encoder on the target phone.",
+    "MapLibre offline APIs cannot enforce the current provider cap before it is exceeded.",
+    "OpenFreeMap terms, availability, style or coverage no longer support the intended use.",
+    "Tripper FOTA 11.63 rejects the retained K1G handshake or H.264/RTP profile.",
+    "Joystick events conflict with observed target-bike behavior.",
+    "Android changes alter foreground location, connected-device service, Wi-Fi binding or screen-off behavior."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:android-wifi-permissions", "slug": "android-wifi-permissions",
+  "title": "Request permission to access nearby Wi-Fi devices", "source_type": "official_documentation", "publisher": {"name": "Android Developers", "organization": "Google"},
+  "locator": {"url": "https://developer.android.com/develop/connectivity/wifi/wifi-permissions"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z"},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.95, "rationale": "Primary platform guidance."}, "evidence_status": "validated", "language": "en",
+  "claims": [{"claim_id": "claim:android-local-wifi-network", "claim": "Apps targeting Android 13+ that manage Wi-Fi connections should request NEARBY_WIFI_DEVICES and may assert neverForLocation when they do not derive location from Wi-Fi.", "relationship": "direct_support"}]
+}

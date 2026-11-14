@@ -1,0 +1,66 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:renderer-spike-phone-run",
+  "slug": "renderer-spike-phone-run",
+  "title": "MirrorDash renderer-spike phone run",
+  "source_type": "internal_artifact",
+  "publisher": {
+    "name": "Android Debug Bridge, Android system UI and owner report of the TFT on the owner-provided iQOO I2405"
+  },
+  "locator": {
+    "persistent_identifier": "urn:local:mirrordash:renderer-spike-phone-run:2026-11-07"
+  },
+  "access": {
+    "method": "device_observation",
+    "accessed_at": "2026-11-07T18:24:35Z",
+    "requires_auth": false,
+    "availability": "internal",
+    "notes": "The debug APK installed and launched. After the owner powered the parked TFT and entered its passphrase directly on the phone, Android joined the reported Tripper SSID. MirrorDash displayed its streaming state and Android Wi-Fi counters showed active traffic. The owner then confirmed that the TFT displayed the MirrorDash renderer test pattern. ADB was unavailable for follow-up screen-off and Stop checks. No passphrase, BSSID, device serial or phone IP is retained."
+  },
+  "freshness": {
+    "classification": "current",
+    "status": "fresh",
+    "last_verified_at": "2026-11-07T18:24:35Z",
+    "review_after": "2026-11-14T18:19:42Z"
+  },
+  "license": {
+    "status": "not_applicable",
+    "redistribution": "metadata_and_summary_only"
+  },
+  "confidence": {
+    "level": "medium",
+    "score": 0.8,
+    "rationale": "Phone-side installation, Wi-Fi association, active foreground service and app-reported stream state were directly observed. The owner reported seeing the renderer test pattern on the TFT; this has not been independently captured, and screen-off, lock, Stop and long-duration behavior remain unverified."
+  },
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [
+    {
+      "claim_id": "claim:renderer-spike-installed-on-phone",
+      "claim": "The current debug APK was installed and launched on the owner-provided iQOO I2405.",
+      "relationship": "direct_support",
+      "location": "ADB install and explicit MainActivity launch on 2026-11-07."
+    },
+    {
+      "claim_id": "claim:renderer-spike-phone-stream-state",
+      "claim": "After the user entered the Tripper Wi-Fi passphrase on-device, Android joined the reported RE_LT09_260125 network and MirrorDash reported that the app-owned renderer test was streaming.",
+      "relationship": "direct_support",
+      "location": "Android Wi-Fi status, RideSessionService foreground state, MirrorDash status screen and Wi-Fi packet counters on 2026-11-07.",
+      "limitations": [
+        "Does not prove the TFT decoded or displayed the frame.",
+        "Does not validate display-off, lock, joystick, long-duration stability or FOTA compatibility."
+      ]
+    },
+    {
+      "claim_id": "claim:renderer-spike-tft-pattern-visible",
+      "claim": "The owner reported that the parked Himalayan TFT displayed the MirrorDash renderer test pattern during the app-owned stream trial.",
+      "relationship": "direct_support",
+      "location": "Owner's direct report in the conversation on 2026-11-07.",
+      "limitations": [
+        "The workstation did not independently capture the TFT image.",
+        "Does not validate screen-off, lock, notification Stop, sustained duration, joystick behavior, resolution limits or FOTA compatibility."
+      ]
+    }
+  ]
+}

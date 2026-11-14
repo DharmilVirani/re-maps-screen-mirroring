@@ -1,0 +1,17 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:android-location-screen-off",
+  "slug": "android-location-screen-off",
+  "title": "Request location permissions",
+  "source_type": "official_documentation",
+  "publisher": {"name": "Android Developers", "organization": "Google"},
+  "locator": {"url": "https://developer.android.com/develop/sensors-and-location/location/permissions"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z"},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.97, "rationale": "Official Android location and foreground-service guidance."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:android-screen-off-location-fgs", "claim": "A location foreground service can retain foreground location access when the app is backgrounded or the display is off, provided the applicable location permission and service declaration requirements are met.", "relationship": "direct_support", "location": "Foreground location"}]
+}

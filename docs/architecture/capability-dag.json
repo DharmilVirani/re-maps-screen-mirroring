@@ -1,0 +1,225 @@
+{
+  "artifact_type": "capability-dag",
+  "schema_version": "1.0.0",
+  "id": "graph:mirrordash-implementation",
+  "project_definition_id": "project:mirrordash-android-app-v1",
+  "nodes": [
+    {
+      "id": "node:project-evidence",
+      "owner": "project-definition-interpreter / evidence-research-broker",
+      "inputs": [
+        "owner-approved spec",
+        "prior Tripper observations",
+        "official Android and MapLibre references",
+        "provider terms"
+      ],
+      "outputs": [
+        "docs/project/project-definition.json",
+        "docs/research/evidence-ledger.json",
+        "docs/research/offscreen-navigation-evidence-ledger.json"
+      ],
+      "status": "complete"
+    },
+    {
+      "id": "node:architecture-contract",
+      "owner": "leader-agent",
+      "inputs": [
+        "PDC",
+        "evidence ledger",
+        "architecture review"
+      ],
+      "outputs": [
+        "docs/architecture/artifact-packet.json",
+        "docs/architecture/capability-dag.json"
+      ],
+      "status": "complete"
+    },
+    {
+      "id": "node:renderer-spike",
+      "owner": "mobile-app-engineer",
+      "inputs": [
+        "existing H.264 encoder",
+        "Tripper transport/session",
+        "app-owned static test view"
+      ],
+      "outputs": [
+        "RideSessionService",
+        "TripperMapRenderer",
+        "Presentation/VirtualDisplay to encoder path"
+      ],
+      "status": "phone_stream_active_tft_observation_pending"
+    },
+    {
+      "id": "node:gpx-route-domain",
+      "owner": "mobile-app-engineer",
+      "inputs": [
+        "GPX files",
+        "phone GPS"
+      ],
+      "outputs": [
+        "GpxImporter",
+        "RoutePlan",
+        "RouteProgressTracker"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "node:offline-map",
+      "owner": "mobile-app-engineer",
+      "inputs": [
+        "MapLibre offline API",
+        "OpenFreeMap terms",
+        "route bounds"
+      ],
+      "outputs": [
+        "MapPackRepository",
+        "provider-safe offline pack and attribution"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "node:ride-session-and-ui",
+      "owner": "mobile-app-engineer",
+      "inputs": [
+        "route readiness",
+        "Tripper profile",
+        "permissions",
+        "renderer"
+      ],
+      "outputs": [
+        "RideSessionService",
+        "Ride screen",
+        "foreground notification and cleanup"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "node:build-verification",
+      "owner": "mobile-app-engineer",
+      "inputs": [
+        "integrated app source",
+        "installed SDK 37",
+        "Gradle wrapper"
+      ],
+      "outputs": [
+        "app/build/outputs/apk/debug/app-debug.apk",
+        "build result record"
+      ],
+      "status": "debug_build_passed_device_install_pending"
+    },
+    {
+      "id": "node:parked-device-validation",
+      "owner": "project owner",
+      "inputs": [
+        "debug APK",
+        "Android phone",
+        "parked Himalayan 450 Tripper"
+      ],
+      "outputs": [
+        "renderer, stream, offline, joystick, screen-off and thermal observations"
+      ],
+      "status": "awaiting_device_and_bike"
+    },
+    {
+      "id": "node:security-review",
+      "owner": "security-reviewer",
+      "inputs": [
+        "integrated app source",
+        "privacy and transport contracts"
+      ],
+      "outputs": [
+        "docs/reviews/security-review.md"
+      ],
+      "status": "pending"
+    }
+  ],
+  "edges": [
+    {
+      "from": "node:project-evidence",
+      "to": "node:architecture-contract",
+      "artifact": "PDC, source ledger and approved architecture"
+    },
+    {
+      "from": "node:architecture-contract",
+      "to": "node:renderer-spike",
+      "artifact": "typed renderer, surface and Tripper contracts"
+    },
+    {
+      "from": "node:renderer-spike",
+      "to": "node:gpx-route-domain",
+      "artifact": "passed renderer feasibility gate"
+    },
+    {
+      "from": "node:gpx-route-domain",
+      "to": "node:offline-map",
+      "artifact": "validated route geometry and bounds"
+    },
+    {
+      "from": "node:offline-map",
+      "to": "node:ride-session-and-ui",
+      "artifact": "ready local map pack and attribution"
+    },
+    {
+      "from": "node:renderer-spike",
+      "to": "node:ride-session-and-ui",
+      "artifact": "encoder-bound map renderer"
+    },
+    {
+      "from": "node:ride-session-and-ui",
+      "to": "node:build-verification",
+      "artifact": "integrated Android app"
+    },
+    {
+      "from": "node:build-verification",
+      "to": "node:parked-device-validation",
+      "artifact": "debug APK"
+    },
+    {
+      "from": "node:ride-session-and-ui",
+      "to": "node:security-review",
+      "artifact": "integrated source and privacy controls"
+    }
+  ],
+  "integration_contracts": [
+    {
+      "id": "contract:renderer-to-encoder",
+      "from": "TripperMapRenderer",
+      "to": "H264Encoder",
+      "message": "start(encoderSurface), update(TftRenderState), zoomBy(delta), recenter(), close()",
+      "threading": "Presentation and MapLibre lifecycle on main thread; encoder output on codec callback thread",
+      "error_behavior": "Fail session visibly and release Presentation, VirtualDisplay, encoder and Surface."
+    },
+    {
+      "id": "contract:ride-to-tripper",
+      "from": "RideSessionService",
+      "to": "TripperSession/TripperTransport",
+      "message": "Connect over selected Network, authenticate, begin projection, send encoded frames and receive control packets",
+      "threading": "Service lifecycle on main thread; blocking UDP and protocol work on owned worker executor",
+      "error_behavior": "Bound reconnect attempts; report stage and clean up sockets, callbacks and locks."
+    },
+    {
+      "id": "contract:ride-to-location",
+      "from": "RideSessionService",
+      "to": "PhoneLocationSource/RouteProgressTracker",
+      "message": "Start GPS only after explicit Ride start; publish current progress and guarded ETA",
+      "threading": "Location callbacks feed domain state; renderer updates marshalled to main thread",
+      "error_behavior": "Show no-GPS/stale/off-route state and omit ungrounded ETA."
+    },
+    {
+      "id": "contract:map-pack",
+      "from": "MapPackRepository",
+      "to": "MapLibre offline API/OpenFreeMap",
+      "message": "Prepare one route-bound offline region with identifying User-Agent, concurrency and provider caps",
+      "threading": "Provider downloads run outside the active bike network session",
+      "error_behavior": "Cancel and delete incomplete over-cap packs; never split downloads to evade limits."
+    }
+  ],
+  "replan_triggers": [
+    "Presentation/VirtualDisplay does not deliver continuous app-owned frames to the encoder on the target phone.",
+    "MapLibre offline APIs cannot enforce the current provider cap before it is exceeded.",
+    "OpenFreeMap terms, availability, style or coverage no longer support the intended use.",
+    "Tripper FOTA 11.63 rejects the retained K1G handshake or H.264/RTP profile.",
+    "Joystick events conflict with observed target-bike behavior.",
+    "Android changes alter foreground location, connected-device service, Wi-Fi binding or screen-off behavior."
+  ]
+}

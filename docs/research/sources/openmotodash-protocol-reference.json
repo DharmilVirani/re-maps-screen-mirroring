@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:openmotodash-protocol-reference", "slug": "openmotodash-protocol-reference",
+  "title": "OpenMotoDash better-dash protocol reference", "source_type": "repository", "publisher": {"name": "OpenMotoDash contributors", "organization": "OpenMotoDash"},
+  "locator": {"url": "https://github.com/OpenMotoDash/better-dash/tree/e32d885372e8f18b49c3bf73c8add8692d377b5b"}, "version": {"label": "Reviewed commit e32d885372e8f18b49c3bf73c8add8692d377b5b"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "historical", "status": "review_due", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-02-07T00:00:00Z", "volatility_notes": "Protocol observations may lag Tripper firmware."},
+  "license": {"status": "known", "spdx_id": "Apache-2.0", "name": "Apache License 2.0", "url": "https://github.com/OpenMotoDash/better-dash/blob/main/LICENSE", "redistribution": "allowed", "usage_notes": "This source is protocol evidence. Any copied source must retain applicable license and notice files."},
+  "confidence": {"level": "medium", "score": 0.66, "rationale": "A public reverse-engineered implementation, not a manufacturer specification."}, "evidence_status": "validated", "language": "en",
+  "claims": [{"claim_id": "claim:tripper-protocol-observations", "claim": "The project documents K1G control/auth over UDP 2000/2002, RSA session setup, 526x300 H.264 projection and RTP over UDP 5000 with FU-A packetization.", "relationship": "direct_support", "notes": "The reviewed client binds its control socket to local UDP 2000 and its receiver to local UDP 2002. It does not validate the remote source port. Specific packet and firmware compatibility remains unverified."}]
+}

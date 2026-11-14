@@ -1,0 +1,443 @@
+{
+  "research_gate": {
+    "decision": "required",
+    "rationale": "The project depends on versioned Android foreground/display behavior, current MapLibre APIs, changing map-provider rights and limits, and an undocumented Tripper protocol.",
+    "applicable_versions": [
+      "Android 16 on reported iQOO I2405; targetSdk 36 / compileSdk 37",
+      "Tripper FOTA 11.63 as owner-reported",
+      "MapLibre Native Android 13.7.1 at plan time; recheck before implementation",
+      "OpenFreeMap terms accessed 2026-11-07"
+    ]
+  },
+  "queries": [
+    "Android official VirtualDisplay and Presentation rendering into an app Surface",
+    "Android official location and connected-device foreground-service permissions, visible-app start, and screen-off behavior",
+    "Android official overlay-window permission and special-use foreground-service type requirements",
+    "Android Doze network restrictions during an active local navigation session",
+    "Android WifiNetworkSpecifier, Nearby Wi-Fi permission, and Network.bindSocket",
+    "Android MediaCodec Surface-input H.264 encoding",
+    "MapLibre Android offline-region and MapSnapshotter APIs",
+    "MapLibre Android artifacts and custom HTTP client configuration",
+    "OpenFreeMap offline limits, User-Agent, terms, and service availability",
+    "OpenStreetMap attribution requirements for a TFT-rendered map",
+    "Community Tripper H.264/RTP profiles and conflicting joystick mappings"
+  ],
+  "claim_ids": [
+    "claim:android-doze-network-limits",
+    "claim:android-fgs-types",
+    "claim:android-h264-input-surface",
+    "claim:android-local-wifi-network",
+    "claim:android-screen-off-location-fgs",
+    "claim:android-virtual-display-rendering",
+    "claim:betterdash-joystick-events",
+    "claim:community-joystick-zoom-codes",
+    "claim:community-tripper-video-profile",
+    "claim:maplibre-android-sdk-13-7-1",
+    "claim:maplibre-http-client-override",
+    "claim:maplibre-offline-regions",
+    "claim:maplibre-snapshotter-fallback",
+    "claim:openfreemap-offline-limits",
+    "claim:osm-visible-attribution",
+    "claim:tripper-protocol-observations",
+    "claim:user-bike-configuration",
+    "claim:renderer-spike-installed-on-phone",
+    "claim:renderer-spike-phone-stream-state",
+    "claim:renderer-spike-tft-pattern-visible",
+    "claim:royal-enfield-fullmap-visible-with-panel-off",
+    "claim:android-overlay-window-permission",
+    "claim:android-special-use-fgs",
+    "claim:whatsapp-overlay-coexists-with-tripper-feed",
+    "claim:mirrordash-display-power-on-command-unsupported"
+  ],
+  "source_ids": [
+    "source:android-displaymanager",
+    "source:android-doze",
+    "source:android-foreground-service-types",
+    "source:android-location-screen-off",
+    "source:android-mediacodec",
+    "source:android-network-api",
+    "source:android-wifi-permissions",
+    "source:android-wifi-specifier",
+    "source:betterdash-control-reference",
+    "source:internal-tripper-validation",
+    "source:maplibre-android-artifacts",
+    "source:maplibre-http-client",
+    "source:maplibre-offline",
+    "source:maplibre-snapshotter",
+    "source:opendash-reference",
+    "source:openfreemap-terms",
+    "source:openmotodash-protocol-reference",
+    "source:osm-attribution",
+    "source:tripper-user-observations",
+    "source:renderer-spike-phone-run",
+    "source:royal-enfield-screen-off-test",
+    "source:android-overlay-permission",
+    "source:android-special-use-fgs",
+    "source:whatsapp-overlay-navigation-test"
+  ],
+  "claim_source_links": [
+    {
+      "claim_id": "claim:android-local-wifi-network",
+      "source_id": "source:android-wifi-specifier",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Android user's consented association to an SSID",
+      "limitations": [
+        "The bike's actual Wi-Fi security mode is unknown."
+      ]
+    },
+    {
+      "claim_id": "claim:android-local-wifi-network",
+      "source_id": "source:android-wifi-permissions",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Nearby Wi-Fi permission on Android 13+",
+      "limitations": [
+        "Exact runtime dialog wording varies by Android release and OEM."
+      ]
+    },
+    {
+      "claim_id": "claim:android-local-wifi-network",
+      "source_id": "source:android-network-api",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Binding only Tripper UDP sockets to the selected Network",
+      "limitations": [
+        "Must be verified against actual routing on the target phone."
+      ]
+    },
+    {
+      "claim_id": "claim:android-h264-input-surface",
+      "source_id": "source:android-mediacodec",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Surface-input MediaCodec encoder",
+      "limitations": [
+        "Codec support, output profile, thermal cost and decoder compatibility vary by device and bike firmware."
+      ]
+    },
+    {
+      "claim_id": "claim:tripper-protocol-observations",
+      "source_id": "source:openmotodash-protocol-reference",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "review_due",
+      "scope": "Unofficial K1G control, RSA handshake, RTP H.264 assumptions and 526x300 output",
+      "limitations": [
+        "Reverse-engineered project, not a Royal Enfield protocol document.",
+        "FOTA 11.63 behavior remains untested."
+      ]
+    },
+    {
+      "claim_id": "claim:user-bike-configuration",
+      "source_id": "source:tripper-user-observations",
+      "relationship": "direct_support",
+      "evidence_status": "assumption",
+      "freshness_status": "unknown",
+      "scope": "User-reported SSID, address, ports and FOTA",
+      "limitations": [
+        "Not independently remeasured against the motorcycle in this session."
+      ]
+    },
+    {
+      "claim_id": "claim:tripper-protocol-observations",
+      "source_id": "source:internal-tripper-validation",
+      "relationship": "context_only",
+      "evidence_status": "partial",
+      "freshness_status": "current",
+      "scope": "Existing re-connector project records the protocol as unverified for the target bike firmware",
+      "limitations": [
+        "Repository inspection is not a live bike protocol test."
+      ]
+    },
+    {
+      "claim_id": "claim:android-virtual-display-rendering",
+      "source_id": "source:android-displaymanager",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Android virtual display surface behavior",
+      "limitations": [
+        "Does not prove MapLibre lifecycle or OEM screen-off behavior on the target phone."
+      ]
+    },
+    {
+      "claim_id": "claim:android-screen-off-location-fgs",
+      "source_id": "source:android-location-screen-off",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Foreground location while the app is backgrounded or display is off",
+      "limitations": [
+        "Requires the correct permission state and a valid foreground-service start path."
+      ]
+    },
+    {
+      "claim_id": "claim:android-fgs-types",
+      "source_id": "source:android-foreground-service-types",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Android location and connected-device service type declarations",
+      "limitations": [
+        "Must be checked against the app's final target SDK and manifest."
+      ]
+    },
+    {
+      "claim_id": "claim:android-doze-network-limits",
+      "source_id": "source:android-doze",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Network and wake behavior during Doze",
+      "limitations": [
+        "Whether this exact active ride workload enters an interrupting state is unmeasured."
+      ]
+    },
+    {
+      "claim_id": "claim:maplibre-offline-regions",
+      "source_id": "source:maplibre-offline",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "MapLibre offline-region API surface",
+      "limitations": [
+        "Map data, provider rights, and coverage are separate dependencies."
+      ]
+    },
+    {
+      "claim_id": "claim:maplibre-snapshotter-fallback",
+      "source_id": "source:maplibre-snapshotter",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Snapshot API call and render behavior",
+      "limitations": [
+        "Does not establish that repeated snapshots meet the required update cadence."
+      ]
+    },
+    {
+      "claim_id": "claim:maplibre-android-sdk-13-7-1",
+      "source_id": "source:maplibre-android-artifacts",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "MapLibre Android artifact available at review time",
+      "limitations": [
+        "Version must be rechecked when implementation begins; device/backend compatibility remains unverified."
+      ]
+    },
+    {
+      "claim_id": "claim:maplibre-http-client-override",
+      "source_id": "source:maplibre-http-client",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Custom HTTP client for MapLibre resources",
+      "limitations": [
+        "The chosen client and dispatcher behavior still need implementation-level validation."
+      ]
+    },
+    {
+      "claim_id": "claim:openfreemap-offline-limits",
+      "source_id": "source:openfreemap-terms",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Provider terms accessed 2026-11-07",
+      "limitations": [
+        "Terms, endpoints, coverage, and availability may change."
+      ]
+    },
+    {
+      "claim_id": "claim:osm-visible-attribution",
+      "source_id": "source:osm-attribution",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "OSM data attribution in the rendered product",
+      "limitations": [
+        "Other data sources may impose additional attribution or license conditions."
+      ]
+    },
+    {
+      "claim_id": "claim:community-tripper-video-profile",
+      "source_id": "source:opendash-reference",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "review_due",
+      "scope": "Community H.264/RTP output dimensions",
+      "limitations": [
+        "Not an official TFT maximum or a validation of the owner's FOTA 11.63 unit."
+      ]
+    },
+    {
+      "claim_id": "claim:community-joystick-zoom-codes",
+      "source_id": "source:opendash-reference",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "review_due",
+      "scope": "One community mapping of joystick codes",
+      "limitations": [
+        "Conflicts with another community implementation; verify on the target bike."
+      ]
+    },
+    {
+      "claim_id": "claim:betterdash-joystick-events",
+      "source_id": "source:betterdash-control-reference",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "review_due",
+      "scope": "Alternative community interpretation of joystick codes",
+      "limitations": [
+        "Community event meanings may vary by firmware and require direct validation."
+      ]
+    },
+    {
+      "claim_id": "claim:renderer-spike-installed-on-phone",
+      "source_id": "source:renderer-spike-phone-run",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Phone-side installation, bike Wi-Fi association and app-reported renderer-spike session state",
+      "limitations": [
+        "Does not confirm TFT decode or screen-off behavior."
+      ]
+    },
+    {
+      "claim_id": "claim:renderer-spike-phone-stream-state",
+      "source_id": "source:renderer-spike-phone-run",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Phone-side installation, bike Wi-Fi association and app-reported renderer-spike session state",
+      "limitations": [
+        "Does not confirm TFT decode or screen-off behavior."
+      ]
+    },
+    {
+      "claim_id": "claim:renderer-spike-tft-pattern-visible",
+      "source_id": "source:renderer-spike-phone-run",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "current",
+      "scope": "Owner-reported visible renderer test pattern on the parked TFT",
+      "limitations": [
+        "Reported by the owner rather than independently captured by the workstation.",
+        "Does not validate screen-off, lock, Stop, sustained duration or FOTA compatibility."
+      ]
+    },
+    {
+      "claim_id": "claim:royal-enfield-fullmap-visible-with-panel-off",
+      "source_id": "source:royal-enfield-screen-off-test",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "current",
+      "scope": "One parked Royal Enfield full-map session with the phone display off and Android unlocked",
+      "limitations": [
+        "TFT visibility was owner-confirmed, not independently captured.",
+        "The display-off command was issued through ADB shell, not through MirrorDash's Shizuku binder path.",
+        "Does not establish long-duration, riding, or lock-screen behavior."
+      ]
+    },
+    {
+      "claim_id": "claim:mirrordash-display-power-on-command-unsupported",
+      "source_id": "source:royal-enfield-screen-off-test",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Display-power recovery on the tested iQOO I2405 / Android 16 build",
+      "limitations": [
+        "Does not establish behavior on other phone models or Android builds."
+      ]
+    },
+    {
+      "claim_id": "claim:whatsapp-overlay-coexists-with-tripper-feed",
+      "source_id": "source:whatsapp-overlay-navigation-test",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "current",
+      "scope": "Owner-reported test of a WhatsApp floating bubble during an active Royal Enfield TFT navigation session",
+      "limitations": [
+        "Does not validate the MirrorDash overlay or its Shizuku command.",
+        "Duration and lock state were not reported."
+      ]
+    },
+    {
+      "claim_id": "claim:android-overlay-window-permission",
+      "source_id": "source:android-overlay-permission",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Android overlay permission and settings API",
+      "limitations": [
+        "OEM settings screens can differ in appearance."
+      ]
+    },
+    {
+      "claim_id": "claim:android-special-use-fgs",
+      "source_id": "source:android-special-use-fgs",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Android 14+ foreground service declaration for the floating control",
+      "limitations": [
+        "Play distribution policy review is separate from API conformance."
+      ]
+    }
+  ],
+  "synthesis": [
+    "Android documents a private virtual-display surface and foreground location-service behavior that make an app-owned screen-off renderer plausible; neither establishes continuous rendering on the target phone.",
+    "MapLibre provides rendering and offline-region APIs, while map-data rights, coverage, attribution, availability and download limits are controlled by a separate provider.",
+    "The selected OpenFreeMap usage requires an identifying User-Agent, current per-pack limits, visible attribution and a feasibility gate if the Android SDK cannot bound a pack before it exceeds those limits.",
+    "H.264/RTP defaults and joystick semantics are community observations. The default video profile, K1G behavior and input mapping remain unverified against the owner’s FOTA 11.63 TFT.",
+    "Route geometry and live GPS can remain on-device; map preparation sends requests for the selected area to the provider.",
+    "The debug APK is installed on the iQOO I2405, has joined the owner-reported Tripper Wi-Fi after the owner entered its passphrase on-device, and reports the phone-side renderer stream active; the owner reported the renderer test pattern visible on the TFT. Separately, the owner confirmed the Royal Enfield full-map route remained visible during one unlocked display-off trial; this did not validate MirrorDash's Shizuku binder path or the new app-owned renderer."
+  ],
+  "contradictions": [
+    "OpenDash maps observed joystick codes to zoom actions while BetterDash maps them to directional UI navigation; only parked observation on the target bike can resolve the conflict.",
+    "Android documents virtual-display and foreground-service behavior, but no reviewed source proves continuous MapLibre rendering to the TFT when this OEM phone is screen-off or locked."
+  ],
+  "limitations": [
+    "No raw TFT packet capture or independent TFT image capture, joystick trial, offline-region download, screen-off/lock test or thermal measurement has been performed for the new app-owned architecture; the owner reported the renderer test pattern visible.",
+    "MapLibre offline API status does not expose a total required-byte estimate before region download completion; implementation must prove it can remain within provider terms or stop provider integration.",
+    "Provider terms, endpoint availability and map coverage can change and must be rechecked before release.",
+    "Context.dev tools were unavailable during earlier research; primary Android/MapLibre documentation and source repository references were used."
+  ],
+  "license_and_redistribution_constraints": [
+    "OpenMotoDash and BetterDash are Apache-2.0 repositories; protocol reference does not require copying code, and any copied source must retain applicable notices.",
+    "MapLibre code and provider map data have separate licenses and terms. Preserve OpenStreetMap and any additional source attribution in the app.",
+    "OpenFreeMap terms and service limits must be followed; do not evade limits by dividing a download."
+  ],
+  "confidence": {
+    "level": "medium",
+    "score": 0.68,
+    "rationale": "Android and MapLibre APIs are documented. Target renderer behavior, provider cap enforcement and Tripper FOTA 11.63 interoperability are unverified."
+  },
+  "traceability_ids": [
+    "project:mirrordash-android-app-v1",
+    "requirement:app-owned-map-rendering",
+    "requirement:gpx-offline-navigation",
+    "requirement:tripper-stream",
+    "requirement:screen-off-foreground-session",
+    "requirement:joystick-control",
+    "requirement:editable-tripper-profile",
+    "requirement:offline-map-provider-terms",
+    "requirement:local-route-privacy",
+    "requirement:video-profile-guardrails",
+    "requirement:android-device-compatibility",
+    "requirement:minimum-privilege",
+    "requirement:bounded-session-resources"
+  ],
+  "review_triggers": [
+    "Recheck Android location, foreground-service, DisplayManager and Doze requirements when target SDK or Android support changes.",
+    "Recheck MapLibre artifacts and offline API behavior before implementation if the plan is run later.",
+    "Recheck OpenFreeMap terms, service availability, endpoint and style before release.",
+    "Replace community protocol and joystick assumptions with parked-device evidence before asserting FOTA 11.63 compatibility.",
+    "Reassess the private VirtualDisplay renderer if it freezes, loses frames or fails when the phone is screen-off or locked."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:whatsapp-overlay-navigation-test",
+  "slug": "whatsapp-overlay-navigation-test",
+  "title": "Owner test of a floating bubble over Royal Enfield navigation",
+  "source_type": "internal_artifact",
+  "publisher": {
+    "name": "Owner report from the active MirrorDash development conversation"
+  },
+  "locator": {
+    "persistent_identifier": "urn:local:mirrordash:whatsapp-overlay-navigation-test:2026-11-08"
+  },
+  "version": {
+    "label": "Owner-provided Android phone and Himalayan 450 Tripper; app versions and firmware not recorded for this observation"
+  },
+  "access": {
+    "method": "user_report",
+    "accessed_at": "2026-11-08T10:17:12Z",
+    "requires_auth": false,
+    "availability": "internal",
+    "notes": "The owner reports that Royal Enfield navigation was connected to the TFT, a WhatsApp floating bubble was opened above the active app, and the TFT navigation remained visible. The owner did not report tapping a display-off control in this test. The duration and whether Android was locked were not specified."
+  },
+  "freshness": {
+    "classification": "current",
+    "status": "fresh",
+    "last_verified_at": "2026-11-08T10:17:12Z",
+    "review_after": "2026-11-15T10:17:12Z"
+  },
+  "license": {
+    "status": "not_applicable",
+    "redistribution": "metadata_and_summary_only"
+  },
+  "confidence": {
+    "level": "medium",
+    "score": 0.7,
+    "rationale": "Direct owner observation supports that the tested WhatsApp bubble did not interrupt navigation in that run; it does not validate MirrorDash's overlay implementation or Shizuku display-off command."
+  },
+  "evidence_status": "partial",
+  "language": "en",
+  "claims": [
+    {
+      "claim_id": "claim:whatsapp-overlay-coexists-with-tripper-feed",
+      "claim": "In the owner's test, a WhatsApp floating bubble appeared over active Royal Enfield navigation while the TFT route remained visible.",
+      "relationship": "direct_support",
+      "location": "Owner report in the conversation on 2026-11-08.",
+      "limitations": [
+        "The TFT image was owner-observed, not independently captured.",
+        "This was a WhatsApp bubble, not the new MirrorDash bubble.",
+        "The test did not turn off the display or verify locked-phone continuity."
+      ]
+    }
+  ]
+}

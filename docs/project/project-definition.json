@@ -1,0 +1,478 @@
+{
+  "$schema": "schemas/project-definition.schema.json",
+  "schema_version": "1.0.0",
+  "id": "project:mirrordash-android-app-v1",
+  "slug": "mirrordash-tripper-screen-mirroring",
+  "name": "MirrorDash screen mirroring for Himalayan Tripper",
+  "lifecycle": "implementation",
+  "problem": {
+    "statement": "MirrorDash must send a selected navigation app to the Himalayan 450 Tripper in a semicircular layout that fits the TFT’s usable area. The bike connection should remain active while the phone is locked; video may pause while locked and resume after unlock.",
+    "domain_ids": [
+      "domain:android-motorcycle-navigation-projection"
+    ],
+    "current_state": "Connect & mirror captures the selected app with Android MediaProjection and sends H.264/RTP over the user-selected Tripper Wi-Fi network. The new semicircle compositor builds successfully but has not yet been checked on the TFT. Connection behavior through phone lock is not yet investigated.",
+    "desired_state": "Keep the selected navigation app’s map visible in a semicircular TFT frame. Keep the Tripper connection alive through phone lock, resume mirroring after unlock, and end the session only when the user explicitly disconnects. Keep bike connection details editable.",
+    "out_of_scope": [
+      "Replacing the selected navigation app with an app-owned MapLibre/GPX navigator in this iteration",
+      "Reading or recreating navigation details such as Google Maps ETA and distance",
+      "Modifying Royal Enfield firmware",
+      "Claiming lock persistence or TFT resolution support before target-device validation",
+      "Setup or testing while the motorcycle is moving"
+    ]
+  },
+  "users": {
+    "primary": [
+      {
+        "id": "user-group:himalayan-450-owner",
+        "description": "An Android phone owner mirroring a selected navigation app to a Himalayan 450 Tripper Dash, with a semicircular TFT layout and a connection that should survive phone lock.",
+        "persona_ids": [],
+        "evidence_status": "assumption"
+      }
+    ],
+    "secondary": [
+      {
+        "id": "user-group:android-device-owner",
+        "description": "An Android phone owner who supplies editable Tripper SSID, optional session-only Wi-Fi passphrase, IP address, UDP ports and video profile.",
+        "persona_ids": [],
+        "evidence_status": "assumption"
+      }
+    ],
+    "affected": [
+      {
+        "id": "user-group:nearby-road-users",
+        "description": "Other road users may be affected if the phone or bike display distracts the rider; app validation is restricted to a parked motorcycle.",
+        "persona_ids": [],
+        "evidence_status": "assumption"
+      }
+    ],
+    "research_status": "owner requirements approved; broader user research not performed"
+  },
+  "outcomes": [
+    {
+      "id": "outcome:semicircle-mirror-and-persistent-tripper-link",
+      "statement": "The selected navigation app is streamed to the Tripper inside a semicircular frame; the Tripper connection stays active through phone lock and mirroring resumes after unlock until explicit disconnect.",
+      "metrics": [
+        {
+          "name": "Semicircle mirror",
+          "target": "The TFT displays the selected app inside the intended semicircular usable area at the configured video profile.",
+          "measurement": "Check framing, legibility and stream stability on the owner’s parked bike."
+        },
+        {
+          "name": "Locked connection",
+          "target": "The authenticated Tripper session remains connected while the phone is locked; video may pause during lock.",
+          "measurement": "Observe connection state and TFT output while locking and unlocking the target phone."
+        },
+        {
+          "name": "Resume after unlock",
+          "target": "Mirroring resumes after unlock without manually reconnecting to the bike.",
+          "measurement": "Repeat lock/unlock during a parked session and confirm the TFT resumes receiving frames."
+        },
+        {
+          "name": "Explicit disconnect",
+          "target": "The app stops streaming and releases the bike connection only after user disconnect or terminal failure.",
+          "measurement": "Use Disconnect and verify the TFT stream and app session stop."
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "workflow:connect-mirror-and-recover-after-unlock",
+      "name": "Connect, mirror in the TFT semicircle, and resume after phone unlock",
+      "actor_ids": [
+        "user-group:himalayan-450-owner"
+      ],
+      "steps": [
+        "While parked, start navigation in the chosen phone app and set its orientation for the desired TFT view.",
+        "Review the editable Tripper Wi-Fi, address, control/video ports and video profile in MirrorDash.",
+        "Tap Connect & mirror, grant Android screen-capture consent and accept the Tripper Wi-Fi connection prompt.",
+        "Confirm the selected app appears in the semicircular TFT viewport.",
+        "After lock-persistence behavior is implemented, lock and unlock the phone to verify the Tripper link remains connected and the mirror resumes.",
+        "Tap Disconnect in MirrorDash to stop the stream and release the Tripper session."
+      ],
+      "success_state": "The TFT shows the selected app in the semicircle. Phone lock does not require a new bike connection; mirroring resumes after unlock and the connection ends on explicit Disconnect.",
+      "failure_states": [
+        "Android capture permission is missing or revoked.",
+        "The selected Tripper Wi-Fi network is unavailable or association fails.",
+        "TFT authentication or video compatibility fails.",
+        "Android or device power management terminates the Tripper link while locked.",
+        "The capture session cannot resume after unlock and requires a user-visible recovery action."
+      ]
+    }
+  ],
+  "requirements": {
+    "functional": [
+      {
+        "id": "requirement:semicircle-screen-mirror",
+        "statement": "Capture the user-selected app through Android MediaProjection, compose the captured content into a semicircular TFT viewport, and send it using the existing H.264/RTP path.",
+        "priority": "must",
+        "acceptance_criteria": [
+          "The full captured source is aspect-fitted into the semicircular output without stretching; unused pixels remain masked.",
+          "The configured video dimensions, frame rate and bitrate are honored by the output and existing Tripper stream.",
+          "The rendered crop is confirmed on the owner’s actual TFT before compatibility is claimed."
+        ],
+        "source_ids": [
+          "source:android-media-projection",
+          "source:android-mediacodec",
+          "source:internal-tripper-validation"
+        ]
+      },
+      {
+        "id": "requirement:tripper-session-through-lock",
+        "statement": "Keep the authenticated Tripper Wi-Fi/control session active while the Android phone is locked; allow video capture to pause while locked and resume mirroring after unlock without a manual bike reconnect.",
+        "priority": "must",
+        "acceptance_criteria": [
+          "The Royal Enfield app’s connection and screen-lock behavior is investigated on the owner-connected phone before implementing the equivalent session handling.",
+          "A parked lock/unlock check confirms Tripper connection continuity and mirror resumption on the target phone and bike.",
+          "If Android ends MediaProjection on lock, the app reports the capture state and only resumes through a supported user-visible recovery path."
+        ],
+        "source_ids": [
+          "source:android-media-projection",
+          "source:android-doze",
+          "source:tripper-user-observations"
+        ]
+      },
+      {
+        "id": "requirement:user-triggered-display-off-bubble",
+        "statement": "Provide an explicitly started floating MirrorDash control that can turn off the phone display over an already active navigation app through the fixed Shizuku display-power operation, without bringing MirrorDash to the foreground or requiring a MirrorDash stream.",
+        "priority": "must",
+        "acceptance_criteria": [
+          "Show the floating control only after the user starts it and grants Android overlay permission; keep an ongoing notification with a Hide bubble action.",
+          "Tapping the bubble sends only the fixed display-off command through Shizuku; it does not launch or minimize Royal Enfield.",
+          "A parked target-device check confirms whether the Royal Enfield route remains visible on the TFT with the phone display off; assess locked-phone continuity separately."
+        ],
+        "source_ids": [
+          "source:android-overlay-permission",
+          "source:android-special-use-fgs",
+          "source:royal-enfield-screen-off-test",
+          "source:whatsapp-overlay-navigation-test"
+        ]
+      },
+      {
+        "id": "requirement:explicit-session-disconnect",
+        "statement": "Keep the active Tripper connection and stream until the user explicitly disconnects or a terminal connection failure occurs.",
+        "priority": "must",
+        "acceptance_criteria": [
+          "The active-session notification and app UI expose a clear Disconnect/Stop action.",
+          "Explicit disconnect sends the existing Tripper stop sequence and releases capture, encoder, sockets, callbacks and locks.",
+          "Transient phone lock does not invoke session teardown."
+        ],
+        "source_ids": [
+          "source:internal-tripper-validation",
+          "source:android-foreground-services"
+        ]
+      },
+      {
+        "id": "requirement:editable-tripper-profile",
+        "statement": "Allow the user to edit the Tripper SSID, optional session-only passphrase, TFT address, control/response/video UDP ports, output dimensions, frame rate and bitrate.",
+        "priority": "must",
+        "acceptance_criteria": [
+          "Defaults match the owner-reported profile but remain editable.",
+          "Only non-secret profile values persist locally; the Wi-Fi passphrase is session-only and never logged.",
+          "Unverified output dimensions are identified as experimental."
+        ],
+        "source_ids": [
+          "source:tripper-user-observations"
+        ]
+      }
+    ],
+    "non_functional": [
+      {
+        "id": "requirement:android-device-compatibility",
+        "statement": "Support Android 14 and later, initially validating against the reported Android 16 phone and Himalayan 450 Tripper.",
+        "priority": "must",
+        "acceptance_criteria": [
+          "MediaProjection, foreground execution, Wi-Fi association and lock/unlock behavior are checked on the target phone."
+        ],
+        "source_ids": [
+          "source:android-media-projection",
+          "source:android-foreground-services"
+        ]
+      },
+      {
+        "id": "requirement:bounded-session-resources",
+        "statement": "Scope Wi-Fi, projection, encoder, sockets, callbacks, locks and recovery attempts to the active mirroring session and release them deterministically.",
+        "priority": "must",
+        "acceptance_criteria": [
+          "Explicit disconnect and terminal failure release all session-owned resources."
+        ],
+        "source_ids": [
+          "source:android-foreground-services",
+          "source:android-media-projection"
+        ]
+      }
+    ]
+  },
+  "platforms": {
+    "targets": [
+      "Android 14+",
+      "Android 16 primary target"
+    ],
+    "devices": [
+      "Royal Enfield Himalayan 450 Tripper Dash",
+      "iQOO I2405 Android phone, observed over ADB during renderer-spike validation; Android version reported as 16 in prior context"
+    ],
+    "connectivity": "intermittent",
+    "supported_locales": [
+      "en-IN"
+    ]
+  },
+  "experience": {
+    "visual_direction": {
+      "tone": [
+        "clear",
+        "high contrast",
+        "utility-focused",
+        "calm"
+      ],
+      "avoid": [
+        "riding-time setup",
+        "dense diagnostic jargon",
+        "Royal Enfield brand imitation"
+      ],
+      "color_constraints": [
+        "Use the existing MirrorDash design system on the phone.",
+        "Fit the selected app’s captured image inside the upper semicircular usable TFT area while preserving its source aspect ratio.",
+        "Keep the captured app’s own labels and navigation overlay intact; do not redraw or extract them."
+      ]
+    },
+    "interaction": {
+      "primary_patterns": [
+        "Connect & mirror",
+        "Android screen-capture consent",
+        "editable Tripper connection and video settings",
+        "clear connected/streaming/paused/reconnecting states",
+        "explicit Disconnect/Stop action"
+      ],
+      "input_methods": [
+        "touch before ride",
+        "Android system screen-capture picker",
+        "Android system Wi-Fi prompt",
+        "physical phone lock/unlock controls"
+      ]
+    },
+    "motion": {
+      "level": "low",
+      "purpose": [
+        "Keep the mirrored image stable while resizing or resuming capture after unlock."
+      ],
+      "reduced_motion_behavior": "Keep status and route information available without relying on animation.",
+      "performance_budget_required": true
+    },
+    "accessibility": {
+      "target_standard": "Android accessibility services and Material 3 semantics",
+      "target_level": "Core setup, route readiness and stop flow",
+      "manual_testing_required": true,
+      "additional_needs": [
+        "Large labels and controls",
+        "TalkBack labels",
+        "Do not rely on color alone for connection state",
+        "No setup interaction is required after the ride starts"
+      ]
+    }
+  },
+  "architecture": {
+    "preferred_stack": [
+      "Native Android",
+      "Kotlin",
+      "Jetpack Compose",
+      "Android MediaProjection",
+      "Presentation and private VirtualDisplay compositor",
+      "MediaCodec H.264",
+      "RTP/UDP",
+      "WifiNetworkSpecifier",
+      "Android foreground service"
+    ],
+    "integrations": [
+      "Android system screen-capture consent and selected app content",
+      "Royal Enfield Tripper over user-configured local Wi-Fi and UDP",
+      "Shizuku panel power operation with an optional, user-started floating display-off bubble"
+    ],
+    "deployment_targets": [
+      "Debug APK for owner-side parked validation"
+    ]
+  },
+  "data": {
+    "classifications": [
+      "personal",
+      "sensitive_personal",
+      "public_map_data"
+    ],
+    "retention": "Mirrored pixels and live navigation content are streamed locally and are not recorded or uploaded. Live capture and the optional Wi-Fi passphrase are session-only. Non-secret Tripper profile values persist locally.",
+    "residency": "Captured pixels, control data and video remain on the phone and local Tripper Wi-Fi connection; there is no backend, recording or analytics path.",
+    "real_production_data_allowed_in_tests": false,
+    "data_quality_risks": [
+      "User-entered Tripper network settings or ports may be wrong.",
+      "The phone may revoke MediaProjection during lock or app lifecycle changes.",
+      "The Tripper decoder may reject an unverified output profile or crop."
+    ]
+  },
+  "risks": [
+    {
+      "id": "risk:tripper-protocol-firmware-drift",
+      "category": "technical",
+      "statement": "Tripper control packets, video framing and authentication are unofficial and can vary by firmware.",
+      "likelihood": "possible",
+      "impact": "major",
+      "mitigation": [
+        "Keep connection settings editable.",
+        "Verify all compatibility claims on the parked target TFT."
+      ]
+    },
+    {
+      "id": "risk:android-lock-capture-lifecycle",
+      "category": "technical",
+      "statement": "Android or phone power management may stop screen capture or the local network session when the phone is locked.",
+      "likelihood": "possible",
+      "impact": "major",
+      "mitigation": [
+        "Inspect the Royal Enfield app’s behavior on the connected phone.",
+        "Validate session continuity and mirror recovery on the target device."
+      ]
+    },
+    {
+      "id": "risk:unverified-peer-and-cleartext-video",
+      "category": "security",
+      "statement": "The Tripper peer is not cryptographically verified and H.264/RTP may be sent without end-to-end encryption.",
+      "likelihood": "possible",
+      "impact": "major",
+      "mitigation": [
+        "Connect only to the user’s trusted Tripper Wi-Fi network.",
+        "Do not store or upload captured content."
+      ]
+    },
+    {
+      "id": "risk:operator-distraction",
+      "category": "user_harm",
+      "statement": "Changing navigation or connection settings while riding can distract the rider.",
+      "likelihood": "possible",
+      "impact": "severe",
+      "mitigation": [
+        "Restrict setup and validation to a parked motorcycle.",
+        "Make all session controls available before departure."
+      ]
+    }
+  ],
+  "constraints": {
+    "technical": [
+      "The Tripper protocol is unofficial and reverse-engineered.",
+      "The semicircular compositor builds but still requires visual verification on the target TFT.",
+      "Royal Enfield lock-persistence behavior must be observed on the owner-connected phone before selecting an equivalent Android session design.",
+      "Android may limit MediaProjection, foreground networking or Wi-Fi association across lock and unlock."
+    ],
+    "budget": [
+      "No paid services or backend are planned."
+    ],
+    "timeline": [
+      "Implement the approved plan sequentially in this workspace."
+    ],
+    "legal_and_policy": [
+      "Do not bypass map provider limits or terms.",
+      "Retain notices and attribution for any upstream code or map data.",
+      "Test motorcycle behavior only while parked."
+    ]
+  },
+  "autonomy": {
+    "mode": "collaborative",
+    "confirmation_required_for": []
+  },
+  "research": {
+    "required_topics": [
+      "How the installed Royal Enfield app maintains its Tripper connection and turn-by-turn feed while the phone is locked",
+      "Android MediaProjection lifecycle and foreground-service behavior during phone lock/unlock",
+      "Existing MirrorDash Tripper H.264/RTP and control session behavior"
+    ],
+    "open_questions": [
+      "Which Royal Enfield app component or Android service keeps the Tripper session alive while locked?",
+      "Does the target Android version preserve this MediaProjection session through lock, and what recovery is supported if it does not?",
+      "Does the semicircular crop fit the actual TFT usable area at the selected video profile?"
+    ],
+    "source_ids": [
+      "source:tripper-user-observations",
+      "source:internal-tripper-validation",
+      "source:android-media-projection",
+      "source:android-foreground-services",
+      "source:android-doze",
+      "source:royal-enfield-screen-off-test"
+    ]
+  },
+  "validation": {
+    "quality_gate_ids": [
+      "gate:project-definition",
+      "gate:debug-apk-build",
+      "gate:semicircle-tft-acceptance",
+      "gate:locked-session-investigation",
+      "gate:lock-unlock-recovery",
+      "gate:security-review"
+    ],
+    "evaluation_case_ids": [
+      "case:semicircle-frame",
+      "case:lock-session",
+      "case:unlock-resume",
+      "case:display-off-bubble",
+      "case:explicit-disconnect"
+    ],
+    "user_validation_required": true,
+    "release_criteria": [
+      "Debug APK assembles.",
+      "The semicircle crop is confirmed on the actual parked TFT.",
+      "The display-off bubble is validated on the parked target phone with Royal Enfield navigation active.",
+      "Royal Enfield connection behavior is investigated before implementing locked-session persistence.",
+      "Locked connection continuity, unlock recovery and explicit disconnect are observed on the owner’s phone and parked bike.",
+      "No resolution, lock-persistence or TFT-compatibility claim exceeds observed device evidence."
+    ]
+  },
+  "evidence": {
+    "status": "partially_observed",
+    "source_ids": [
+      "source:tripper-user-observations",
+      "source:internal-tripper-validation",
+      "source:renderer-spike-phone-run",
+      "source:royal-enfield-screen-off-test",
+      "source:whatsapp-overlay-navigation-test"
+    ],
+    "assumptions": [
+      "The owner-reported bike profile and firmware values are accurate but not independently remeasured here.",
+      "The earlier renderer test pattern was reported visible on the TFT; the new semicircle composition has not yet been confirmed on the TFT.",
+      "Royal Enfield’s locked-session behavior will be inspected after the owner reconnects the phone over USB debugging."
+    ],
+    "validation_plan": [
+      "Install the current debug APK on the reconnected target phone and verify the semicircle crop on the parked TFT.",
+      "Use REA to inspect the Royal Enfield app’s connection/session behavior while a navigation route is active.",
+      "Implement and verify Tripper session continuity through phone lock, mirror resumption after unlock, and explicit disconnect.",
+      "Check failure cleanup and ensure the optional passphrase and captured pixels are not logged or persisted."
+    ],
+    "confidence": {
+      "level": "medium",
+      "score": 0.62,
+      "rationale": "The semicircle compositor compiles and the underlying Tripper stream has been exercised, but the new crop and locked-session behavior are still awaiting target-device verification."
+    }
+  },
+  "traceability": [
+    {
+      "target_id": "requirement:semicircle-screen-mirror",
+      "relation": "implements",
+      "notes": "SemicircleMirrorRenderer composites MediaProjection capture into the configured H.264 encoder surface; build passes, TFT framing awaits validation."
+    },
+    {
+      "target_id": "requirement:tripper-session-through-lock",
+      "relation": "validates",
+      "notes": "Next investigation: inspect Royal Enfield’s live connection behavior through REA after USB reconnect, then implement and test an equivalent session lifecycle."
+    },
+    {
+      "target_id": "requirement:user-triggered-display-off-bubble",
+      "relation": "implements",
+      "notes": "PanelBubbleService shows an explicit overlay and reuses the fixed Shizuku display-off command; the MirrorDash bubble still requires parked TFT validation."
+    },
+    {
+      "target_id": "requirement:explicit-session-disconnect",
+      "relation": "implements",
+      "notes": "ProjectionService owns Tripper session, encoder, renderer and sockets and releases them on Stop."
+    },
+    {
+      "target_id": "requirement:editable-tripper-profile",
+      "relation": "implements",
+      "notes": "Connect & mirror exposes editable Tripper connection and output-profile settings."
+    }
+  ]
+}

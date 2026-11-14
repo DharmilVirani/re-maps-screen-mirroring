@@ -1,0 +1,18 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:betterdash-control-reference",
+  "slug": "betterdash-control-reference",
+  "title": "BetterDash Tripper button handling",
+  "source_type": "repository",
+  "publisher": {"name": "OpenMotoDash contributors", "organization": "OpenMotoDash"},
+  "locator": {"url": "https://github.com/OpenMotoDash/better-dash/tree/e32d885372e8f18b49c3bf73c8add8692d377b5"},
+  "version": {"label": "Reviewed commit e32d885372e8f18b49c3bf73c8add8692d377b5"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "historical", "status": "review_due", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-02-07T00:00:00Z", "volatility_notes": "Reverse-engineered event meanings may differ by firmware."},
+  "license": {"status": "known", "spdx_id": "Apache-2.0", "name": "Apache License 2.0", "url": "https://github.com/OpenMotoDash/better-dash/blob/e32d885372e8f18b49c3bf73c8add8692d377b5/LICENSE", "redistribution": "allowed", "usage_notes": "Protocol evidence only; retain notices if code is copied."},
+  "confidence": {"level": "medium", "score": 0.62, "rationale": "Pinned community implementation, not manufacturer documentation."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:betterdash-joystick-events", "claim": "This implementation assigns the observed joystick codes to left/right UI navigation, conflicting with another community project's zoom mapping for the same codes.", "relationship": "direct_support", "location": "dash_ui/bike_link.py", "notes": "The actual action on the owner's TFT must be checked while parked."}]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:internal-tripper-validation", "slug": "internal-tripper-validation",
+  "title": "Existing re-connector Tripper protocol validation note", "source_type": "internal_artifact", "publisher": {"name": "Project owner and implementation notes"},
+  "locator": {"persistent_identifier": "urn:local:re-connector:docs/decisions/tripper-protocol-validation.md"},
+  "access": {"method": "file", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "internal", "notes": "The source artifact is in the separate re-connector project; this ledger summarizes its recorded status."},
+  "freshness": {"classification": "historical", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z"},
+  "license": {"status": "not_applicable", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "medium", "score": 0.74, "rationale": "Repository note directly documents the validation gap; it is not a live bike observation."}, "evidence_status": "validated", "language": "en",
+  "claims": [{"claim_id": "claim:tripper-protocol-observations", "claim": "The existing project records the owner's ports as observations and the OpenMotoDash packet sequence as unverified for FOTA 11.63.", "relationship": "context_only", "location": "Existing re-connector docs/decisions/tripper-protocol-validation.md"}]
+}

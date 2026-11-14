@@ -1,0 +1,17 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:android-doze",
+  "slug": "android-doze",
+  "title": "Optimize for Doze and App Standby",
+  "source_type": "official_documentation",
+  "publisher": {"name": "Android Developers", "organization": "Google"},
+  "locator": {"url": "https://developer.android.com/training/monitoring-device-state/doze-standby"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z"},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.95, "rationale": "Official Android power-management documentation; exact target workload is unmeasured."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:android-doze-network-limits", "claim": "Doze can restrict network access and alter wake-lock behavior; a foreground service alone is not proof of uninterrupted network access in every device state.", "relationship": "direct_support", "location": "Doze restrictions"}]
+}

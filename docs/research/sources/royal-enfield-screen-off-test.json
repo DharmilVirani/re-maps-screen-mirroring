@@ -1,0 +1,64 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:royal-enfield-screen-off-test",
+  "slug": "royal-enfield-screen-off-test",
+  "title": "Royal Enfield full-map display-off parked test",
+  "source_type": "internal_artifact",
+  "publisher": {
+    "name": "Android Debug Bridge, Android system state and owner TFT observation on the owner-provided iQOO I2405"
+  },
+  "locator": {
+    "persistent_identifier": "urn:local:mirrordash:royal-enfield-screen-off-test:2026-11-07"
+  },
+  "version": {
+    "label": "Android 16/API 36; Royal Enfield app 10.1.23(45); Shizuku 13.6.0; Tripper FOTA 11.63 owner-reported"
+  },
+  "access": {
+    "method": "device_observation",
+    "accessed_at": "2026-11-07T19:26:55Z",
+    "requires_auth": false,
+    "availability": "internal",
+    "notes": "Parked test. Before display-off, ADB showed Android unlocked (mInputRestricted=false), the Royal Enfield app foreground, and association to the owner-reported Tripper Wi-Fi. The owner confirmed the TFT was displaying a full-map route. The display was turned off with `adb shell cmd display power-off 0`; this is the same shell command used by MirrorDash's Shizuku UserService, but this run invoked it through the authorized USB ADB shell rather than through MirrorDash's Shizuku binder path. For about one minute, Android remained awake and unlocked, the Royal Enfield app remained foreground, bike Wi-Fi stayed associated, and wlan0 transmitted 319,624 additional bytes over an 8-second sample. The owner confirmed the route image remained visible on the TFT. During recovery, `cmd display power-on 0` returned `Unknown command: power-on`; `KEYCODE_WAKEUP` did not restore the panel, while `KEYCODE_POWER` restored it and activated the lock screen. No passphrase, BSSID, device serial or phone IP is retained."
+  },
+  "freshness": {
+    "classification": "current",
+    "status": "fresh",
+    "last_verified_at": "2026-11-07T19:26:55Z",
+    "review_after": "2026-11-14T19:26:55Z"
+  },
+  "license": {
+    "status": "not_applicable",
+    "redistribution": "metadata_and_summary_only"
+  },
+  "confidence": {
+    "level": "medium",
+    "score": 0.84,
+    "rationale": "Phone unlock, app foreground, Wi-Fi association and display state were directly checked. Wi-Fi byte counts are interface-wide, not attributed to the Royal Enfield process. TFT route continuity was directly confirmed by the owner, but the workstation did not capture the TFT. The screen-off command was issued through ADB shell, so Shizuku API integration was not exercised."
+  },
+  "evidence_status": "partial",
+  "language": "en",
+  "claims": [
+    {
+      "claim_id": "claim:royal-enfield-fullmap-visible-with-panel-off",
+      "claim": "In one parked run, the owner confirmed that the Royal Enfield full-map route remained visible on the Himalayan TFT while the phone display was off and Android remained unlocked.",
+      "relationship": "direct_support",
+      "location": "ADB display/power/window/Wi-Fi state and owner confirmation during the 2026-11-07 device run.",
+      "limitations": [
+        "The owner confirmed TFT visibility; the workstation did not independently capture the TFT.",
+        "The command ran through ADB shell, not MirrorDash's Shizuku binder path.",
+        "One parked run does not establish long-duration or riding reliability, and does not test the lock-screen path."
+      ]
+    },
+    {
+      "claim_id": "claim:mirrordash-display-power-on-command-unsupported",
+      "claim": "On the tested Android 16 phone, `cmd display power-on 0` was rejected as an unknown command; a power-key event restored the display but activated the lock screen.",
+      "relationship": "direct_support",
+      "location": "ADB command output and post-recovery dumpsys display/window state during the 2026-11-07 device run.",
+      "limitations": [
+        "Applies to this iQOO I2405 software build only.",
+        "The user must manually unlock after the power-key recovery event."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:tripper-user-observations", "slug": "tripper-user-observations",
+  "title": "Owner-reported Himalayan 450 Tripper configuration", "source_type": "user_research", "publisher": {"name": "User"},
+  "locator": {"path": "docs/project/project-definition.json"},
+  "access": {"method": "file", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "internal", "notes": "Values are quoted from the current user request."},
+  "freshness": {"classification": "historical", "status": "unknown", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-11-07T00:00:00Z"},
+  "license": {"status": "not_applicable", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "medium", "score": 0.72, "rationale": "Direct user report, not independently measured on the motorcycle."}, "evidence_status": "assumption", "language": "en",
+  "claims": [{"claim_id": "claim:user-bike-configuration", "claim": "The user's Tripper reports FOTA 11.63, SSID RE_LT09_260125, TFT address 192.168.1.1, control ports UDP 2000/2002 and video UDP 5000.", "relationship": "direct_support", "notes": "Dynamic form defaults only; never hardcode as the only supported bike profile."}]
+}

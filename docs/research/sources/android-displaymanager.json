@@ -1,0 +1,17 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:android-displaymanager",
+  "slug": "android-displaymanager",
+  "title": "DisplayManager API",
+  "source_type": "official_documentation",
+  "publisher": {"name": "Android Developers", "organization": "Google"},
+  "locator": {"url": "https://developer.android.com/reference/android/hardware/display/DisplayManager"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z"},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.97, "rationale": "Official Android API reference; target OEM behavior remains unverified."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:android-virtual-display-rendering", "claim": "Android virtual displays render their content to an app-provided Surface; flags determine display behavior, and a virtual display should be released when no longer needed.", "relationship": "direct_support", "location": "createVirtualDisplay"}]
+}

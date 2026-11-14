@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:android-media-projection", "slug": "android-media-projection",
+  "title": "Media projection", "source_type": "official_documentation", "publisher": {"name": "Android Developers", "organization": "Google"},
+  "locator": {"url": "https://developer.android.com/media/grow/media-projection"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z", "volatility_notes": "Android projection rules can change with API releases."},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only", "usage_notes": "Use short paraphrases and link to Android Developers."},
+  "confidence": {"level": "high", "score": 0.96, "rationale": "Primary platform documentation."}, "evidence_status": "validated", "language": "en",
+  "claims": [{"claim_id": "claim:android-consented-app-window-capture", "claim": "Android 14+ supports system-mediated capture of a selected app window; each MediaProjection session requires fresh user consent.", "relationship": "direct_support", "location": "App screen sharing and MediaProjection consent sections"}, {"claim_id": "claim:android-projection-lifecycle", "claim": "The app must handle MediaProjection callbacks and release the session when stopped; Android 15 QPR1+ stops screen projection when the device is locked.", "relationship": "direct_support", "location": "MediaProjection.Callback and Android 15 QPR1 behavior sections"}]
+}

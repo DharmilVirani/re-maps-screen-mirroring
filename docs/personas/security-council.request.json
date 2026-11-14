@@ -1,0 +1,17 @@
+{
+  "decision_id": "decision:screen-capture-security-review",
+  "skill_ids": [
+    "skill:security-reviewer"
+  ],
+  "user_archetype_ids": [],
+  "context_facet_ids": [
+    "context-facet:sensitive-data"
+  ],
+  "expert_method_ids": [
+    "expert-method:threat-modeling"
+  ],
+  "material_decision": true,
+  "project_signals": [
+    "context:sensitive-data"
+  ]
+}

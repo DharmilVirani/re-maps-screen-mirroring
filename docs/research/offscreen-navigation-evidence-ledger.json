@@ -1,0 +1,277 @@
+{
+  "research_gate": {
+    "decision": "required",
+    "rationale": "The design depends on current Android foreground-service, location, display, power, map-provider, licensing, and undocumented Tripper behavior.",
+    "applicable_versions": [
+      "Android 16 on the reported iQOO I2405",
+      "Tripper FOTA 11.63 as owner-reported",
+      "MapLibre Native Android API accessed 2026-11-07"
+    ]
+  },
+  "queries": [
+    "Android official VirtualDisplay and Presentation rendering into an app Surface",
+    "Android official screen-off foreground location and foreground-service type requirements",
+    "Android Doze local-network restrictions for an active navigation stream",
+    "MapLibre Android offline-region and MapSnapshotter APIs",
+    "OpenFreeMap offline download limits, terms, and service availability",
+    "OpenStreetMap attribution guidance for a rendered TFT map",
+    "Pinned community Tripper H.264/RTP dimensions and joystick mappings"
+  ],
+  "claim_ids": [
+    "claim:android-virtual-display-rendering",
+    "claim:android-screen-off-location-fgs",
+    "claim:android-fgs-types",
+    "claim:android-doze-network-limits",
+    "claim:maplibre-offline-regions",
+    "claim:maplibre-snapshotter-fallback",
+    "claim:maplibre-android-sdk-13-7-1",
+    "claim:maplibre-http-client-override",
+    "claim:openfreemap-offline-limits",
+    "claim:osm-visible-attribution",
+    "claim:community-tripper-video-profile",
+    "claim:community-joystick-zoom-codes",
+    "claim:betterdash-joystick-events",
+    "claim:renderer-spike-installed-on-phone",
+    "claim:renderer-spike-phone-stream-state",
+    "claim:renderer-spike-tft-pattern-visible"
+  ],
+  "source_ids": [
+    "source:android-displaymanager",
+    "source:android-location-screen-off",
+    "source:android-foreground-service-types",
+    "source:android-doze",
+    "source:maplibre-offline",
+    "source:maplibre-snapshotter",
+    "source:maplibre-android-artifacts",
+    "source:maplibre-http-client",
+    "source:openfreemap-terms",
+    "source:osm-attribution",
+    "source:opendash-reference",
+    "source:betterdash-control-reference",
+    "source:renderer-spike-phone-run"
+  ],
+  "claim_source_links": [
+    {
+      "claim_id": "claim:android-virtual-display-rendering",
+      "source_id": "source:android-displaymanager",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Android virtual display surface behavior",
+      "limitations": [
+        "Does not prove MapLibre lifecycle or OEM screen-off behavior on the target phone."
+      ]
+    },
+    {
+      "claim_id": "claim:android-screen-off-location-fgs",
+      "source_id": "source:android-location-screen-off",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Foreground location while the app is backgrounded or display is off",
+      "limitations": [
+        "Requires the correct permission state and a valid foreground-service start path."
+      ]
+    },
+    {
+      "claim_id": "claim:android-fgs-types",
+      "source_id": "source:android-foreground-service-types",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Android location and connected-device service type declarations",
+      "limitations": [
+        "Must be checked against the app's final target SDK and manifest."
+      ]
+    },
+    {
+      "claim_id": "claim:android-doze-network-limits",
+      "source_id": "source:android-doze",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Network and wake behavior during Doze",
+      "limitations": [
+        "Whether this exact active ride workload enters an interrupting state is unmeasured."
+      ]
+    },
+    {
+      "claim_id": "claim:maplibre-offline-regions",
+      "source_id": "source:maplibre-offline",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "MapLibre offline-region API surface",
+      "limitations": [
+        "Map data, provider rights, and coverage are separate dependencies."
+      ]
+    },
+    {
+      "claim_id": "claim:maplibre-snapshotter-fallback",
+      "source_id": "source:maplibre-snapshotter",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Snapshot API call and render behavior",
+      "limitations": [
+        "Does not establish that repeated snapshots meet the required update cadence."
+      ]
+    },
+    {
+      "claim_id": "claim:maplibre-android-sdk-13-7-1",
+      "source_id": "source:maplibre-android-artifacts",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "MapLibre Android artifact available at review time",
+      "limitations": [
+        "Version must be rechecked when implementation begins; device/backend compatibility remains unverified."
+      ]
+    },
+    {
+      "claim_id": "claim:maplibre-http-client-override",
+      "source_id": "source:maplibre-http-client",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Custom HTTP client for MapLibre resources",
+      "limitations": [
+        "The chosen client and dispatcher behavior still need implementation-level validation."
+      ]
+    },
+    {
+      "claim_id": "claim:openfreemap-offline-limits",
+      "source_id": "source:openfreemap-terms",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Provider terms accessed 2026-11-07",
+      "limitations": [
+        "Terms, endpoints, coverage, and availability may change."
+      ]
+    },
+    {
+      "claim_id": "claim:osm-visible-attribution",
+      "source_id": "source:osm-attribution",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "OSM data attribution in the rendered product",
+      "limitations": [
+        "Other data sources may impose additional attribution or license conditions."
+      ]
+    },
+    {
+      "claim_id": "claim:community-tripper-video-profile",
+      "source_id": "source:opendash-reference",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "review_due",
+      "scope": "Community H.264/RTP output dimensions",
+      "limitations": [
+        "Not an official TFT maximum or a validation of the owner's FOTA 11.63 unit."
+      ]
+    },
+    {
+      "claim_id": "claim:community-joystick-zoom-codes",
+      "source_id": "source:opendash-reference",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "review_due",
+      "scope": "One community mapping of joystick codes",
+      "limitations": [
+        "Conflicts with another community implementation; verify on the target bike."
+      ]
+    },
+    {
+      "claim_id": "claim:betterdash-joystick-events",
+      "source_id": "source:betterdash-control-reference",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "review_due",
+      "scope": "Alternative community interpretation of joystick codes",
+      "limitations": [
+        "Community event meanings may vary by firmware and require direct validation."
+      ]
+    },
+    {
+      "claim_id": "claim:renderer-spike-installed-on-phone",
+      "source_id": "source:renderer-spike-phone-run",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Phone-side installation, bike Wi-Fi association and app-reported renderer-spike session state",
+      "limitations": [
+        "Does not confirm TFT decode or screen-off behavior."
+      ]
+    },
+    {
+      "claim_id": "claim:renderer-spike-phone-stream-state",
+      "source_id": "source:renderer-spike-phone-run",
+      "relationship": "direct_support",
+      "evidence_status": "validated",
+      "freshness_status": "current",
+      "scope": "Phone-side installation, bike Wi-Fi association and app-reported renderer-spike session state",
+      "limitations": [
+        "Does not confirm TFT decode or screen-off behavior."
+      ]
+    },
+    {
+      "claim_id": "claim:renderer-spike-tft-pattern-visible",
+      "source_id": "source:renderer-spike-phone-run",
+      "relationship": "direct_support",
+      "evidence_status": "partial",
+      "freshness_status": "current",
+      "scope": "Owner-reported visible renderer test pattern on the parked TFT",
+      "limitations": [
+        "Reported by the owner rather than independently captured by the workstation.",
+        "Does not validate screen-off, lock, Stop, sustained duration or FOTA compatibility."
+      ]
+    }
+  ],
+  "synthesis": [
+    "Android supports app-owned virtual-display content rendered to a supplied Surface, and foreground location can remain available with the display off when permission and service requirements are met; these platform facts do not prove target-device video compatibility.",
+    "MapLibre supplies rendering and offline-region APIs, while tile data, service limits, coverage, attribution, and availability come from a separate provider; OpenFreeMap also requires an app-identifying User-Agent.",
+    "The default 526x300 H.264/RTP path and joystick semantics are community observations. They remain unverified against the owner's actual bike and firmware.",
+    "The proposed app-owned map avoids MediaProjection but adds an offline-data provider dependency and a target-hardware rendering gate.",
+    "The debug APK is installed on the iQOO I2405, has joined the owner-reported Tripper Wi-Fi after the owner entered its passphrase on-device, and reports the phone-side renderer stream active; the owner reported the renderer test pattern visible on the TFT. Screen-off/lock continuity remains unverified."
+  ],
+  "contradictions": [
+    "OpenDash maps the observed joystick codes to zoom actions, while BetterDash maps them to directional UI navigation; the target bike must decide which behavior applies.",
+    "Android documents virtual-display surface behavior, but no reviewed source establishes continuous MapLibre rendering through screen-off/lock on the owner's OEM phone."
+  ],
+  "limitations": [
+    "No raw TFT packet capture or independent TFT image capture, joystick trial, offline-region download, or screen-off/lock renderer test was performed; the owner reported the renderer test pattern visible.",
+    "No supported public API for importing Google Maps' private route or tile cache was identified in the research; this is a bounded documentation finding, not a claim that private/internal interfaces do not exist."
+  ],
+  "license_and_redistribution_constraints": [
+    "OpenDash and BetterDash are Apache-2.0 repositories; protocol reference does not require copying code, and any copied code must retain its applicable notices.",
+    "The chosen map provider's terms and all map-data attribution/license requirements must be displayed or fulfilled in the app."
+  ],
+  "confidence": {
+    "level": "medium",
+    "score": 0.74,
+    "rationale": "Android and MapLibre APIs are documented; provider terms and community protocol behavior are sourced, while the key screen-off and bike-compatibility outcomes remain untested."
+  },
+  "traceability_ids": [
+    "project:mirrordash-android-app-v1",
+    "requirement:app-owned-map-rendering",
+    "requirement:gpx-offline-navigation",
+    "requirement:tripper-stream",
+    "requirement:screen-off-foreground-session",
+    "requirement:joystick-control",
+    "requirement:editable-tripper-profile",
+    "requirement:offline-map-provider-terms",
+    "requirement:local-route-privacy",
+    "requirement:video-profile-guardrails",
+    "requirement:android-device-compatibility",
+    "requirement:minimum-privilege",
+    "requirement:bounded-session-resources"
+  ],
+  "review_triggers": [
+    "Recheck Android location, foreground-service, DisplayManager, and Doze requirements when changing target SDK or Android support.",
+    "Recheck OpenFreeMap terms, service availability, and map style before implementation and release.",
+    "Replace community-protocol assumptions with parked-device evidence before asserting FOTA 11.63 compatibility.",
+    "Reassess the virtual-display renderer if it freezes, loses frames, or fails when the phone is locked or screen-off."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "decision_id": "decision:android-screen-mirror-architecture",
+  "skill_ids": [
+    "skill:mobile-app-architect",
+    "skill:application-security-implementation-engineer",
+    "skill:project-definition-interpreter",
+    "skill:leader-agent"
+  ],
+  "user_archetype_ids": [],
+  "context_facet_ids": [
+    "context-facet:small-screen-mobile",
+    "context-facet:noisy-environment",
+    "context-facet:intermittent-connectivity"
+  ],
+  "expert_method_ids": [
+    "expert-method:human-centred-design"
+  ],
+  "material_decision": true,
+  "project_signals": [
+    "context:small-screen-mobile",
+    "context:noisy-environment",
+    "context:intermittent-connectivity"
+  ]
+}

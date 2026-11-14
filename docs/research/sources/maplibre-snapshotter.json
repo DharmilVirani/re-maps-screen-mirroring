@@ -1,0 +1,17 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:maplibre-snapshotter",
+  "slug": "maplibre-snapshotter",
+  "title": "MapLibre Android MapSnapshotter API",
+  "source_type": "official_documentation",
+  "publisher": {"name": "MapLibre", "organization": "MapLibre"},
+  "locator": {"url": "https://maplibre.org/maplibre-native/android/api/-map-libre%20-native%20-android/org.maplibre.android.snapshotter/-map-snapshotter/index.html"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z"},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.92, "rationale": "Maintainer API reference; it does not prove suitability for continuous navigation frames."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:maplibre-snapshotter-fallback", "claim": "MapLibre exposes a MapSnapshotter API whose calls are annotated for the UI thread while snapshot rendering occurs asynchronously.", "relationship": "direct_support", "location": "MapSnapshotter API"}]
+}

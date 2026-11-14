@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:royal-enfield-tripper-faq", "slug": "royal-enfield-tripper-faq",
+  "title": "Tripper Dash FAQ", "source_type": "official_documentation", "publisher": {"name": "Royal Enfield", "organization": "Eicher Motors Limited"},
+  "locator": {"url": "https://www.royalenfield.com/in/en/tripper-dash/"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "review_due", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-02-07T00:00:00Z", "volatility_notes": "The page reports current support details that may change."},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "medium", "score": 0.78, "rationale": "Manufacturer public FAQ, but not a protocol spec and not specific to user's FOTA."}, "evidence_status": "validated", "language": "en",
+  "claims": [{"claim_id": "claim:royal-enfield-full-map-screen-state", "claim": "Royal Enfield's FAQ states full-map projection requires the phone screen to remain on; turn-by-turn behavior is described separately.", "relationship": "direct_support", "notes": "FAQ firmware reference is not the user's stated FOTA 11.63."}]
+}

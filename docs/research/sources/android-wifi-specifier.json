@@ -1,0 +1,10 @@
+{
+  "$schema": "schemas/source-evidence.schema.json", "schema_version": "1.0.0", "id": "source:android-wifi-specifier", "slug": "android-wifi-specifier",
+  "title": "WifiNetworkSpecifier.Builder", "source_type": "official_documentation", "publisher": {"name": "Android Developers", "organization": "Google"},
+  "locator": {"url": "https://developer.android.com/reference/android/net/wifi/WifiNetworkSpecifier.Builder"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "stable", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-05-07T00:00:00Z"},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.95, "rationale": "Primary API reference."}, "evidence_status": "validated", "language": "en",
+  "claims": [{"claim_id": "claim:android-local-wifi-network", "claim": "Apps can request a user-approved local Wi-Fi connection using a WifiNetworkSpecifier with a supplied SSID and optional passphrase.", "relationship": "direct_support"}]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:opendash-reference",
+  "slug": "opendash-reference",
+  "title": "OpenDash Himalayan Tripper community implementation",
+  "source_type": "repository",
+  "publisher": {"name": "OpenDash contributors", "organization": "OpenDash"},
+  "locator": {"url": "https://github.com/jayvadolkar/open-dash-re/tree/ed26faf78449a42eb9fc5934957e3e8feaa9839a"},
+  "version": {"label": "Reviewed commit ed26faf78449a42eb9fc5934957e3e8feaa9839a"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "historical", "status": "review_due", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-02-07T00:00:00Z", "volatility_notes": "Pinned source code may not describe later firmware or repository behavior."},
+  "license": {"status": "known", "spdx_id": "Apache-2.0", "name": "Apache License 2.0", "url": "https://github.com/jayvadolkar/open-dash-re/blob/ed26faf78449a42eb9fc5934957e3e8feaa9839a/LICENSE", "redistribution": "allowed", "usage_notes": "Used as protocol evidence. Retain required notices if code is copied."},
+  "confidence": {"level": "medium", "score": 0.66, "rationale": "Public reverse-engineered implementation, not a manufacturer specification."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [
+    {"claim_id": "claim:community-tripper-video-profile", "claim": "The pinned implementation uses H.264/RTP and a 526x300 frame size for its Tripper display path.", "relationship": "direct_support", "location": "DashEncoder.kt and README"},
+    {"claim_id": "claim:community-joystick-zoom-codes", "claim": "The pinned implementation maps joystick codes 0x14 and 0x13 to zoom actions.", "relationship": "direct_support", "location": "DashViewModel.kt", "notes": "This mapping conflicts with another community implementation and requires target-bike validation."}
+  ]
+}

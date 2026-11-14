@@ -1,0 +1,25 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:android-special-use-fgs",
+  "slug": "android-special-use-fgs",
+  "title": "Android foreground-service types and special-use subtype",
+  "source_type": "official_documentation",
+  "publisher": { "name": "Android Developers", "organization": "Google" },
+  "locator": { "url": "https://developer.android.com/develop/background-work/services/fgs/service-types#special-use" },
+  "version": { "label": "Android foreground-service documentation accessed 2026-11-08" },
+  "access": { "method": "web", "accessed_at": "2026-11-08T10:17:12Z", "requires_auth": false, "availability": "public" },
+  "freshness": { "classification": "current", "status": "fresh", "last_verified_at": "2026-11-08T10:17:12Z", "review_after": "2027-02-08T10:17:12Z", "volatility_notes": "Recheck foreground-service type requirements when Android target SDK changes." },
+  "license": { "status": "not_applicable", "redistribution": "metadata_and_summary_only" },
+  "confidence": { "level": "high", "score": 0.94, "rationale": "Official Android documentation for foreground-service type declarations and special-use subtype metadata." },
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [
+    {
+      "claim_id": "claim:android-special-use-fgs",
+      "claim": "Android 14 and later requires foreground services to declare an appropriate service type and its permission; specialUse is intended for valid foreground-service cases not covered by other types and uses a manifest subtype property.",
+      "relationship": "direct_support",
+      "location": "Foreground service types: special use"
+    }
+  ]
+}

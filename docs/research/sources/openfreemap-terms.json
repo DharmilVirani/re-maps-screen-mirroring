@@ -1,0 +1,17 @@
+{
+  "$schema": "schemas/source-evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "source:openfreemap-terms",
+  "slug": "openfreemap-terms",
+  "title": "OpenFreeMap Terms of Service",
+  "source_type": "other",
+  "publisher": {"name": "OpenFreeMap", "organization": "OpenFreeMap"},
+  "locator": {"url": "https://openfreemap.org/tos/"},
+  "access": {"method": "web", "accessed_at": "2026-11-07T00:00:00Z", "requires_auth": false, "availability": "public"},
+  "freshness": {"classification": "current", "status": "fresh", "last_verified_at": "2026-11-07T00:00:00Z", "review_after": "2027-02-07T00:00:00Z", "volatility_notes": "Terms and endpoint availability may change; recheck before releases or bulk download."},
+  "license": {"status": "unknown", "redistribution": "metadata_and_summary_only"},
+  "confidence": {"level": "high", "score": 0.91, "rationale": "Provider's published terms; service availability remains best-effort."},
+  "evidence_status": "validated",
+  "language": "en",
+  "claims": [{"claim_id": "claim:openfreemap-offline-limits", "claim": "The published OpenFreeMap terms cap each offline download at 3,000 tiles or 50 MB, allow at most four parallel requests, and require a unique app-identifying User-Agent; service is provided as-is and may be discontinued.", "relationship": "direct_support", "location": "Offline downloads, disclaimer, and site availability"}]
+}
